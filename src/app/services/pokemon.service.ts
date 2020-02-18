@@ -29,6 +29,7 @@ export class PokemonService {
       https://pokeapi.co/api/v2/pokemon/${pokemonName}/
     `).subscribe(
       pokemonData => {
+        console.log(pokemonData);
         this.createPokemon(pokemonData);
       }
     )

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../services/pokemon.service';
 import { Subscription } from 'rxjs';
 import { Pokemon } from '../pokemon.model';
+import { DataStorageServiceService } from '../services/data-storage-service.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokedex-list',
@@ -15,10 +17,16 @@ export class PokedexListComponent implements OnInit {
   currPokeName: '';
 
   constructor(
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private dataStorageService: DataStorageServiceService
   ) { }
 
   ngOnInit(): void {
+    this.dataStorageService.fetchPokemon().pipe(take(1)).subscribe(
+      (pokemonList: Pokemon[]) => {
+        this.pokemonList = pokemonList;
+      }
+    )
     this.newPokemonSub = this.pokemonService.pokemonListChanged.subscribe(
       (pokemonList: Pokemon[]) => {
         this.pokemonList = pokemonList;

@@ -1,7 +1,7 @@
 <div class="pokemon-item-container">
-  <div class="pokemon-img-container">
-    <img class="pokemon-img-front" [src]="pokemon.frontImg" alt="">
-    <img class="pokemon-img-front" [src]="pokemon.backImg" alt="">
+  <div class="pokemon-img-container" (click)="onToggleImg()" style="cursor: pointer">
+    <img class="pokemon-img-front" [src]="pokemon.frontImg" alt="Front Img" *ngIf="toggleImg" >
+    <img class="pokemon-img-front" [src]="pokemon.backImg" alt="Back Img" *ngIf="!toggleImg">
   </div>
   <h1>{{pokemon.name | titlecase }}</h1>
   <ul>

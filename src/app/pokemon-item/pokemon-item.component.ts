@@ -7,10 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PokemonItemComponent implements OnInit {
   @Input() pokemon;
+  toggleImg = true;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onToggleImg() {
+    this.toggleImg = !this.toggleImg;
   }
 
 }
