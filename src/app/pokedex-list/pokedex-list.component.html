@@ -10,11 +10,9 @@
     <button type="submit" class="search-pokemon-btn" (click)="onSearchSubmit()">Search</button>
   </div>
   <div class="pokemon-list">
-    <ul>
-      <app-pokemon-item
-        *ngFor="let pokemon of pokemonList; let i = index"
-        [pokemon]="pokemon"
-      ></app-pokemon-item>
-    </ul>
+    <app-pokemon-item
+      *ngFor="let pokemon of pokemonList; let i = index"
+      [pokemon]="pokemon"
+    ></app-pokemon-item>
   </div>
 </div>

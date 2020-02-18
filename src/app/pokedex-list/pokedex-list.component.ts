@@ -27,6 +27,7 @@ export class PokedexListComponent implements OnInit {
         this.pokemonList = pokemonList;
       }
     )
+    // this.pokemonService.getAllPokemon()
     this.newPokemonSub = this.pokemonService.pokemonListChanged.subscribe(
       (pokemonList: Pokemon[]) => {
         this.pokemonList = pokemonList;

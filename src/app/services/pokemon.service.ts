@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Pokemon } from '../pokemon.model';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,27 @@ export class PokemonService {
     this.pokemonListChanged.next(this.pokemonList.slice())
   }
 
+  getAllPokemon() {
+    // const promises = [];
+    for (let i = 1; i <= 151; i++) {
+      this.http.get(`https://pokeapi.co/api/v2/pokemon/${i}/`).subscribe(
+        pokemonData => {
+          this.createPokemon(pokemonData);
+        }
+      )
+    }
+    // this.pokemonListChanged.next(this.pokemonList.slice());
+
+    // Promise.all(promises).then(allData => {
+    //   allData.map(pokemonData => {
+    //     pokemonData.subscribe(pokemon => {
+    //       this.createPokemon(pokemon);
+    //     })
+    //   })
+    // })
+    
+  }
+
   getPokemon(pokemonName: string) {
     this.http.get(`
       https://pokeapi.co/api/v2/pokemon/${pokemonName}/
@@ -37,6 +59,7 @@ export class PokemonService {
 
   private createPokemon(pokemonData: object) {
     let newPokemon = new Pokemon(
+      pokemonData['id'],
       pokemonData['name'],
       pokemonData['types'][0]['type']['name'],
       pokemonData['sprites']['front_default'],
