@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../services/pokemon.service';
 import { Subscription } from 'rxjs';
+import { Pokemon } from '../pokemon.model';
 
 @Component({
   selector: 'app-pokedex-list',
@@ -8,32 +9,27 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./pokedex-list.component.scss']
 })
 export class PokedexListComponent implements OnInit {
-  dummyPokemonList = ['charmander', 'bulbasaur', 'squirtle', 'pikachu'];
+  // dummyPokemonList = ['charmander', 'bulbasaur', 'squirtle', 'pikachu'];
   pokemonList = [];
-  currPokeName: '';
   newPokemonSub: Subscription;
+  currPokeName: '';
 
   constructor(
     private pokemonService: PokemonService
   ) { }
 
   ngOnInit(): void {
-    // this.newPokemonSub = this.pokemonService.getPokemon(this.currPokeName).subscribe(
-    //   pokemonData => {
-    //     this.pokemonList.push(pokemonData);
-    //   }
-    // )
-    // console.log(this.pokemonList);
+    this.newPokemonSub = this.pokemonService.pokemonListChanged.subscribe(
+      (pokemonList: Pokemon[]) => {
+        this.pokemonList = pokemonList;
+        console.log(pokemonList, 'hello');
+      }
+    )
+    this.pokemonList = this.pokemonService.getPokemonList();
   }
 
   onSearchSubmit() {
-    console.log(this.currPokeName);
-    this.newPokemonSub = this.pokemonService.getPokemon(this.currPokeName.toLowerCase()).subscribe(
-      pokemonData => {
-        this.pokemonList.push(pokemonData);
-      }
-    )
-    console.log(this.pokemonList);
+    this.pokemonService.getPokemon(this.currPokeName.toLowerCase());
   }
 
 }
