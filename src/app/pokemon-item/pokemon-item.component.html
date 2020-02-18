@@ -4,7 +4,7 @@
   </div>
   <h1>{{pokemon.name | titlecase }}</h1>
   <ul>
-    <li>{{ pokemon.type| titlecase }}</li>
+    <li class="type" [ngClass]="pokemon.type">{{ pokemon.type| titlecase }}</li>
     <li>{{ pokemon.id }}</li>
     <li>{{ pokemon.move1 | titlecase }}</li>
     <li>{{ pokemon.move2 | titlecase }}</li>

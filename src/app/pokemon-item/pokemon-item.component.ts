@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { types } from '../pokemon.types';
 
 @Component({
   selector: 'app-pokemon-item',
@@ -8,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PokemonItemComponent implements OnInit {
   @Input() pokemon;
   toggleImg = true;
+  types = types;
 
   constructor() { }
 

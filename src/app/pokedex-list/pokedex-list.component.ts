@@ -11,7 +11,6 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./pokedex-list.component.scss']
 })
 export class PokedexListComponent implements OnInit {
-  // dummyPokemonList = ['charmander', 'bulbasaur', 'squirtle', 'pikachu'];
   pokemonList = [];
   newPokemonSub: Subscription;
   currPokeName: '';

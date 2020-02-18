@@ -7,7 +7,7 @@ export class Pokemon {
     public move1: string,
     public move2: string,
     public move3: string,
-    public move4: string,
+    public move4?: string,
     public backImg?: string,
   ) { }
 }

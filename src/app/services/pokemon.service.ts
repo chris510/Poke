@@ -58,10 +58,11 @@ export class PokemonService {
   }
 
   private createPokemon(pokemonData: object) {
+    let chosenType = pokemonData['types'][1] ? pokemonData['types'][1]['type']['name'] : pokemonData['types'][0]['type']['name']
     let newPokemon = new Pokemon(
       pokemonData['id'],
       pokemonData['name'],
-      pokemonData['types'][0]['type']['name'],
+      chosenType,
       pokemonData['sprites']['front_default'],
       pokemonData['moves'][0]['move']['name'],
       pokemonData['moves'][1]['move']['name'],
