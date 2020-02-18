@@ -1,0 +1,17 @@
+<div class="pokemon-item-container">
+  <div class="pokemon-img-container">
+    <img class="pokemon-img-front" [src]="pokemon.sprites.front_default" alt="">
+    <img class="pokemon-img-front" [src]="pokemon.sprites.back_default" alt="">
+  </div>
+  <h1>{{pokemon.name | titlecase }}</h1>
+  <ul>
+    <li>{{ pokemon.types[0].type.name | titlecase }}</li>
+    <li>{{ pokemon.id }}</li>
+    <li>{{ pokemon.weight }}</li>
+    <li>{{ pokemon.moves[0].move.name | titlecase }}</li>
+    <li>{{ pokemon.moves[1].move.name | titlecase }}</li>
+    <li>{{ pokemon.moves[2].move.name | titlecase }}</li>
+    <li>{{ pokemon.moves[3].move.name | titlecase }}</li>
+  </ul>
+</div>
+
