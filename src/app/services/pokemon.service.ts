@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Pokemon } from '../pokemon.model';
-import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class PokemonService {
   pokemon = new Subject<any>();
   pokemonListChanged = new Subject<Pokemon[]>();
-  pokemonList = [];
+  private pokemonList = [];
 
   constructor(
     private http: HttpClient
@@ -23,6 +23,11 @@ export class PokemonService {
   addPokemon(pokemon: Pokemon) {
     this.pokemonList.push(pokemon);
     this.pokemonListChanged.next(this.pokemonList.slice())
+  }
+
+  setPokemon(pokemonList: Pokemon[]) {
+    this.pokemonList = pokemonList;
+    this.pokemonListChanged.next(this.pokemonList.slice());
   }
 
   getAllPokemon() {

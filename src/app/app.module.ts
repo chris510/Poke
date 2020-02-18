@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { PokedexListComponent } from './pokedex-list/pokedex-list.component';
 import { PokemonItemComponent } from './pokemon-item/pokemon-item.component';
+import { TeamComponent } from './team/team.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     PokedexListComponent,
-    PokemonItemComponent
+    PokemonItemComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,

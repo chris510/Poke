@@ -7,7 +7,7 @@
     <a style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a>
   </div>
   <div class="nav-links">
-    <a>PokeDex</a>
-    <a>My Pokemon</a>
+    <a [routerLink]="['home']">PokeDex</a>
+    <a routerLink="/team">My Pokemon</a>
   </div>
 </div>

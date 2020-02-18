@@ -25,8 +25,8 @@ export class DataStorageServiceService {
   fetchPokemon() {
     return this.http.get<Pokemon[]>('https://pokemons-a3b54.firebaseio.com/post.json')
       .pipe(
-        tap(pokemons => {
-        console.log(pokemons);
+        tap(pokemonList => {
+        this.pokemonService.setPokemon(pokemonList)
        })
       )
   }

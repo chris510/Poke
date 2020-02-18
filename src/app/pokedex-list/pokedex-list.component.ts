@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PokemonService } from '../services/pokemon.service';
 import { Subscription } from 'rxjs';
 import { Pokemon } from '../pokemon.model';
@@ -10,9 +10,10 @@ import { take } from 'rxjs/operators';
   templateUrl: './pokedex-list.component.html',
   styleUrls: ['./pokedex-list.component.scss']
 })
-export class PokedexListComponent implements OnInit {
+export class PokedexListComponent implements OnInit, OnDestroy {
   pokemonList = [];
   newPokemonSub: Subscription;
+  storage: Subscription;
   currPokeName: '';
 
   constructor(
@@ -21,12 +22,17 @@ export class PokedexListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.dataStorageService.fetchPokemon().pipe(take(1)).subscribe(
-      (pokemonList: Pokemon[]) => {
-        this.pokemonList = pokemonList;
-      }
-    )
+    // this.storage = this.dataStorageService.fetchPokemon().pipe(take(1)).subscribe(
+    //   (pokemonList: Pokemon[]) => {
+    //     this.pokemonList = pokemonList;
+    //   }
+    // )
     // this.pokemonService.getAllPokemon()
+    // console.log(this.pokemonList.length)
+    // if (this.pokemonList.length === 0) {
+    //   this.dataStorageService.fetchPokemon().subscribe();
+    // }
+    // this.pokemonList.length === 0 ? this.dataStorageService.fetchPokemon() : null;
     this.newPokemonSub = this.pokemonService.pokemonListChanged.subscribe(
       (pokemonList: Pokemon[]) => {
         this.pokemonList = pokemonList;
@@ -38,6 +44,11 @@ export class PokedexListComponent implements OnInit {
 
   onSearchSubmit() {
     this.pokemonService.getPokemon(this.currPokeName.toLowerCase());
+  }
+
+  ngOnDestroy() {
+    // this.newPokemonSub.unsubscribe();
+    // this.storage.unsubscribe();
   }
 
 }
