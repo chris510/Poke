@@ -3,7 +3,6 @@ import { PokemonService } from '../services/pokemon.service';
 import { Subscription } from 'rxjs';
 import { Pokemon } from '../pokemon.model';
 import { DataStorageServiceService } from '../services/data-storage-service.service';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokedex-list',
@@ -14,7 +13,9 @@ export class PokedexListComponent implements OnInit, OnDestroy {
   pokemonList = [];
   newPokemonSub: Subscription;
   storage: Subscription;
+  searchPokeSub: Subscription;
   currPokeName: '';
+  error: string = '';
 
   constructor(
     private pokemonService: PokemonService,
@@ -43,10 +44,21 @@ export class PokedexListComponent implements OnInit, OnDestroy {
   }
 
   onSearchSubmit() {
-    this.pokemonService.getPokemon(this.currPokeName.toLowerCase());
+    this.searchPokeSub = this.pokemonService.getPokemon(this.currPokeName.toLowerCase()).subscribe(
+      pokemonData => {
+        this.pokemonService.createPokemon(pokemonData);
+      }, error => {
+        this.error = 'Pokemon Not Found!'
+      }
+    );
+  }
+
+  onHandleError() {
+    this.error = null;
   }
 
   ngOnDestroy() {
+    this.searchPokeSub.unsubscribe();
     // this.newPokemonSub.unsubscribe();
     // this.storage.unsubscribe();
   }

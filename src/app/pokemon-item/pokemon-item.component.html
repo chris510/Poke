@@ -1,16 +1,17 @@
-<div class="pokemon-item-container">
+<div class="pokemon-item-container" >
   <div class="pokemon-img-container" (click)="onToggleImg()" style="cursor: pointer">
     <img class="pokemon-img-front" [src]="toggleImg ? pokemon.frontImg : pokemon.backImg" alt="Front Img"  >
   </div>
+  <span>{{ pokemon.id }}</span>
   <h1>{{pokemon.name | titlecase }}</h1>
-  <ul>
+  <ul class="movelist">
     <li class="type" [ngClass]="pokemon.type">{{ pokemon.type| titlecase }}</li>
-    <li>{{ pokemon.id }}</li>
     <li>{{ pokemon.move1 | titlecase }}</li>
     <li>{{ pokemon.move2 | titlecase }}</li>
     <li>{{ pokemon.move3 | titlecase }}</li>
     <li>{{ pokemon.move4 | titlecase }}</li>
   </ul>
   <button style="cursor: pointer" type="submit">Add to Team</button>
+  <button style="cursor: pointer" type="button" (click)="onPokemonDetail()">Details</button>
 </div>
 

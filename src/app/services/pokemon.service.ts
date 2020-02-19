@@ -52,17 +52,18 @@ export class PokemonService {
   }
 
   getPokemon(pokemonName: string) {
-    this.http.get(`
+    return this.http.get(`
       https://pokeapi.co/api/v2/pokemon/${pokemonName}/
-    `).subscribe(
-      pokemonData => {
-        console.log(pokemonData);
-        this.createPokemon(pokemonData);
-      }
-    )
+    `)
+    // .subscribe(
+    //   pokemonData => {
+    //     console.log(pokemonData);
+    //     this.createPokemon(pokemonData);
+    //   }
+    // )
   }
 
-  private createPokemon(pokemonData: object) {
+  createPokemon(pokemonData: object) {
     let chosenType = pokemonData['types'][1] ? pokemonData['types'][1]['type']['name'] : pokemonData['types'][0]['type']['name']
     let newPokemon = new Pokemon(
       pokemonData['id'],

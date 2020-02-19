@@ -1,13 +1,22 @@
 <div class="pokedex-list-container">
   <div class="search-pokemon-container">
-    <h3>Search Pokemon</h3>
-    <input
-      class="search-pokemon-input"
-      type="text"
-      name="currPokeName"
-      (change)="currPokeName = $event.target.value"
-    >
-    <button type="submit" class="search-pokemon-btn" (click)="onSearchSubmit()">Search</button>
+    <app-alert
+      [message]="error"
+      *ngIf="error"
+      (close)="onHandleError()"
+    ></app-alert>
+    <!-- <p *ngIf="error"> {{error}} </p> -->
+    <div class="search-container">
+      <input
+        class="search-pokemon-input"
+        type="text"
+        placeholder="Search Pokemon..."
+        name="currPokeName"
+        (change)="currPokeName = $event.target.value"
+      >
+      <button type="submit" class="search-pokemon-btn" (click)="onSearchSubmit()">Search</button>
+      <div class="search"></div>
+    </div>
   </div>
   <div class="pokemon-list">
     <app-pokemon-item
