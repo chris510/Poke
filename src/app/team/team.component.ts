@@ -18,13 +18,12 @@ export class TeamComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.myTeam = this.pokemonTeam.getTeam();
-    this.myTeamSub = this.pokemonTeam.myTeamChanged.subscribe(
-      (myPokemonTeam: Pokemon[]) => {
-        console.log(myPokemonTeam);
-        this.myTeam = myPokemonTeam;
-      }
-    )
-    console.log(this.myTeam);
+    // this.myTeamSub = this.pokemonTeam.myTeamChanged.subscribe(
+    //   (myPokemonTeam: Pokemon[]) => {
+    //     console.log(myPokemonTeam);
+    //     this.myTeam = myPokemonTeam;
+    //   }
+    // )
   }
 
   ngOnDestroy() {

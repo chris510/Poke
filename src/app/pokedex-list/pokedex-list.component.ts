@@ -16,10 +16,11 @@ export class PokedexListComponent implements OnInit, OnDestroy {
   searchPokeSub: Subscription;
   currPokeName = '';
   error: string = '';
+  holdBtnMessage: string = '';
+
 
   constructor(
     private pokemonService: PokemonService,
-    private dataStorageService: DataStorageServiceService
   ) { }
 
   ngOnInit(): void {
@@ -60,12 +61,20 @@ export class PokedexListComponent implements OnInit, OnDestroy {
         this.pokemonService.createPokemon(pokemonData);
       }, error => {
         this.error = 'Pokemon Not Found!'
+      }, () => {
+        console.log('this is completed');
       }
     );
   }
 
   onHandleError() {
-    this.error = null;
+    (this.error) ? this.error = null : null;
+    (this.holdBtnMessage) ? this.holdBtnMessage = null : null;
+  }
+
+  holdHandler(msg: string) {
+    console.log(msg);
+    this.holdBtnMessage = msg;
   }
 
   ngOnDestroy() {

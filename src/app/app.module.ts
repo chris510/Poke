@@ -11,6 +11,7 @@ import { PokemonItemComponent } from './pokemon-item/pokemon-item.component';
 import { TeamComponent } from './team/team.component';
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 import { AlertComponent } from './alert/alert.component';
+import { HoldableDirective } from './holdable.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AlertComponent } from './alert/alert.component';
     PokemonItemComponent,
     TeamComponent,
     PokemonDetailComponent,
-    AlertComponent
+    AlertComponent,
+    HoldableDirective
   ],
   imports: [
     BrowserModule,

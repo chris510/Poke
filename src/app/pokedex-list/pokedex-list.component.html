@@ -5,7 +5,15 @@
       *ngIf="error"
       (close)="onHandleError()"
     ></app-alert>
+    <app-alert
+      [message]="holdBtnMessage"
+      *ngIf="holdBtnMessage"
+      (close)="onHandleError()"
+    ></app-alert>
     <!-- <p *ngIf="error"> {{error}} </p> -->
+    <div>
+      <button class="button" appHoldable (holdTime)="holdHandler($event)">Hold for a message!</button>
+    </div>
     <div class="search-container">
       <input
         class="search-pokemon-input"
