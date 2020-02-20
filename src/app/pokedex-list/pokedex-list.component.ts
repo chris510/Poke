@@ -14,7 +14,7 @@ export class PokedexListComponent implements OnInit, OnDestroy {
   newPokemonSub: Subscription;
   storage: Subscription;
   searchPokeSub: Subscription;
-  currPokeName: '';
+  currPokeName = '';
   error: string = '';
 
   constructor(
@@ -44,6 +44,17 @@ export class PokedexListComponent implements OnInit, OnDestroy {
   }
 
   onSearchSubmit() {
+    console.log('This function does not do anything');
+    // this.searchPokeSub = this.pokemonService.getPokemon(this.currPokeName.toLowerCase()).subscribe(
+    //   pokemonData => {
+    //     this.pokemonService.createPokemon(pokemonData);
+    //   }, error => {
+    //     this.error = 'Pokemon Not Found!'
+    //   }
+    // );
+  }
+
+  onHandleKeyEnter() {
     this.searchPokeSub = this.pokemonService.getPokemon(this.currPokeName.toLowerCase()).subscribe(
       pokemonData => {
         this.pokemonService.createPokemon(pokemonData);
@@ -58,7 +69,7 @@ export class PokedexListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.searchPokeSub.unsubscribe();
+    this.searchPokeSub ? this.searchPokeSub.unsubscribe() : null;
     // this.newPokemonSub.unsubscribe();
     // this.storage.unsubscribe();
   }

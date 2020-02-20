@@ -11,7 +11,8 @@
     <li>{{ pokemon.move3 | titlecase }}</li>
     <li>{{ pokemon.move4 | titlecase }}</li>
   </ul>
-  <button style="cursor: pointer" type="submit">Add to Team</button>
-  <button style="cursor: pointer" type="button" (click)="onPokemonDetail()">Details</button>
-</div>
+  <button type="button" (click)="onPokemonDetail()">Details</button>
+  <button type="button" (click)="onAddToTeam()">Add to Team</button>
+  <button type="button" (click)="onDeletePokemon()">Delete</button>
+</div> 
 

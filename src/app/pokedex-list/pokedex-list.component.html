@@ -13,8 +13,9 @@
         placeholder="Search Pokemon..."
         name="currPokeName"
         (change)="currPokeName = $event.target.value"
+        (keydown.enter)="onHandleKeyEnter()"
       >
-      <button type="submit" class="search-pokemon-btn" (click)="onSearchSubmit()">Search</button>
+      <!-- <button type="submit" class="search-pokemon-btn" (click)="onSearchSubmit()">Search</button> -->
       <div class="search"></div>
     </div>
   </div>
@@ -22,6 +23,7 @@
     <app-pokemon-item
       *ngFor="let pokemon of pokemonList; let i = index"
       [pokemon]="pokemon"
+      [index]="i"
     ></app-pokemon-item>
   </div>
 </div>

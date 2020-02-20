@@ -1,1 +1,9 @@
-<p>team works!</p>
+<div class="team">
+  <div class="my-pokemon">
+    <app-pokemon-item
+      *ngFor="let pokemon of myTeam; let i = index"
+      [pokemon]="pokemon"
+      [index]="i"
+    ></app-pokemon-item>
+  </div>
+</div>

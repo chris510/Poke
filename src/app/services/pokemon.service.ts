@@ -2,32 +2,47 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Pokemon } from '../pokemon.model';
+import { MyTeamService } from '../my-team.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class PokemonService {
-  pokemon = new Subject<any>();
+  // pokemon = new Subject<any>();
   pokemonListChanged = new Subject<Pokemon[]>();
   private pokemonList = [];
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private myTeam: MyTeamService
   ) { }
 
   getPokemonList() {
     return this.pokemonList.slice();
   }
 
+  notifyPokemonListChange() {
+    this.pokemonListChanged.next(this.pokemonList.slice())
+  }
+
+  addPokemonToTeam(pokemon: Pokemon) {
+    this.myTeam.addToTeam(pokemon);
+  }
+
   addPokemon(pokemon: Pokemon) {
     this.pokemonList.push(pokemon);
-    this.pokemonListChanged.next(this.pokemonList.slice())
+    this.notifyPokemonListChange();
   }
 
   setPokemon(pokemonList: Pokemon[]) {
     this.pokemonList = pokemonList;
-    this.pokemonListChanged.next(this.pokemonList.slice());
+    this.notifyPokemonListChange();
+  }
+
+  deletePokemon(index: number) {
+    this.pokemonList.splice(index, 1);
+    this.notifyPokemonListChange();
   }
 
   getAllPokemon() {
